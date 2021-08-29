@@ -1,0 +1,26 @@
+\documentclass[assignment1.tex]{subfiles}
+
+\begin{document}
+\tikzset{every tree node/.style={minimum width=2em,draw,circle},
+         blank/.style={draw=none},
+         edge from parent/.style=
+         {draw,edge from parent path={(\tikzparentnode) -- (\tikzchildnode)}},
+         level distance=1.5cm}
+\begin{tikzpicture}
+\Tree
+[.1     
+    [.2 
+    %\edge[]; \node[blank]{};
+    \edge[]; [.4
+             \edge[]; [.6
+                \edge[]; [.8 ]
+                \edge[]; [.9 ]
+             ]
+             \edge[]; [.7 ]
+         ]
+    \edge[]; [.5 ]
+    ]
+    [.3 ]
+]
+\end{tikzpicture}
+\end{document}
