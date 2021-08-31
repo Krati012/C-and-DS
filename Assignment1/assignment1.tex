@@ -142,7 +142,25 @@ https://github.com/Krati012/C-and-DS/tree/main/Assignment1
 \newline
 \textbf{Explanation}: \textbf{Postorder traversal} of a binary tree is a depth-first search in which we first traverse the left subtree, then traverse the right subtree, and finally visit the root node. Whereas in \textbf{inorder traversal} we first traverse the left subtree, visit the root and then traverse the right subtree.
 \newline
-If there are n nodes in binary tree, maximum height of the binary tree is \textbf{$n-1$} and minimum height is \textbf{$floor(log_{2}n)$}. For given problem, n=9, so maximum height of the binary tree possible is 8 and minimum height possible is 3. 
+If there are n nodes in binary tree, maximum height of the binary tree is \textbf{$n-1$}.
+\newline
+A complete binary tree will have minimum height for given $n$ number of nodes. Then height $h$ will lie in the range:
+\begin{equation}
+\label{eq:eqn1}
+ 2^h \leq n \leq 2^{h+1} - 1
+\end{equation}
+Thus, solving this inequality we get:
+\begin{equation}
+\label{eq:eqn2}
+ h \leq log_{2}n,  h \geq log_{2}(n+1) - 1
+\end{equation}
+Since $h$ is an integer, we finally get,
+\begin{equation}
+\label{eq:eqn3}
+ h = floor(log_{2}n) = ceil(log_{2}(n+1) - 1)
+\end{equation}
+Therefore, for a binary tree maximum height is \textbf{$n-1$} and minimum height is \textbf{$floor(log_{2}n)$}.
+For given problem, n=9, so maximum height of the binary tree possible is 8 and minimum height possible is 3. 
 \newline
 The following algorithm allows us to construct the binary tree from given $inorder = [8,6,9,4,7,2,5,1,3]$ and $postorder = [8,9,6,7,4,5,2,3,1]$:
 \begin{itemize}
