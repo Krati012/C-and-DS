@@ -24,19 +24,24 @@ int search(int arr[], int strt, int end, int value){
     return i;
 }
 
-//Recursive function to construct binary tree of size n
+//Recursive function to construct binary tree of size n from inorder traversal in[] and postorder traversal post[]
 struct Node* construct(int in[], int post[], int inStrt, int inEnd, int* pIndex){
+    //Base case
     if(inStrt > inEnd)
         return NULL;
 
+    //Pick current node from post[] using postIndex and decrement postIndex
     struct Node* node = newNode(post[*pIndex]);
     (*pIndex)--;
-
+    
+    //If this node has no children, return node
     if(inStrt == inEnd)
         return node;
 
+    //Else find index of this node in in[]
     int iIndex = search(in, inStrt, inEnd, node->data);
 
+    //Using index in in[], construct left and right subtress
     node->right = construct(in, post, iIndex+1, inEnd, pIndex);
     node->left = construct(in, post, inStrt, iIndex-1, pIndex);
 
@@ -51,9 +56,11 @@ struct Node* constructTree(int in[], int post[], int n){
 
 //Find depth of a binary tree
 int maxDepth(struct Node* node){
+    //Base case
     if(node == NULL)
         return 0;
 
+    //Find maximum depth in right and left subtree of the node
     int lDepth = maxDepth(node->left);
     int rDepth = maxDepth(node->right);
 
