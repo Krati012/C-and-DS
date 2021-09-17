@@ -42,7 +42,7 @@ struct Node* construct(int in[], int post[], int inStrt, int inEnd, int* pIndex)
     //Else find index of this node in in[]
     int iIndex = search(in, inStrt, inEnd, node->data);
 
-    //Using index in in[], construct left and right subtress
+    //Using index in in[], construct left and right subtrees
     node->right = construct(in, post, iIndex+1, inEnd, pIndex);
     node->left = construct(in, post, inStrt, iIndex-1, pIndex);
 
