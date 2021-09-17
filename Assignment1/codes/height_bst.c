@@ -1,3 +1,4 @@
+// C program to recursively construct binary tree from inorder traversal in[] and postorder traversal post[] 
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -19,12 +20,12 @@ int search(int arr[], int strt, int end, int value){
     int i;
     for(i=strt; i<=end; i++){
         if(arr[i] == value)
-            break;
+            break; 
     }
     return i;
 }
 
-//Recursive function to construct binary tree of size n from inorder traversal in[] and postorder traversal post[]
+//Recursive function to construct binary tree of size n from in[] and post[]
 struct Node* construct(int in[], int post[], int inStrt, int inEnd, int* pIndex){
     //Base case
     if(inStrt > inEnd)
