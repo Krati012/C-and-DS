@@ -81,5 +81,20 @@ int main(){
     int ht = maxDepth(root) - 1;
 
     printf("Height of Binary Tree is %d\n", ht);
+
+    //Verification using random binary tree of height 20
+    int in2[] = {40, 38, 41, 36, 39, 34, 37, 32, 35, 30, 33, 28, 31, 26, 29, 24,
+            27, 22, 25, 20, 23, 18, 21, 16, 19, 14, 17, 12, 15, 10, 13, 8, 11,
+            6, 9, 4, 7, 2, 5, 1, 3};
+    int post2[] = {40, 41, 38, 39, 36, 37, 34, 35, 32, 33, 30, 31, 28, 29, 26, 27, 24,
+            25, 22, 23, 20, 21, 18, 19, 16, 17, 14, 15, 12, 13, 10, 11, 8, 9, 6,
+            7, 4, 5, 2, 3, 1};
+    
+    int m = sizeof(in2)/sizeof(in2[0]);
+    struct Node* root2 = constructTree(in2, post2, m);
+
+    int ht2 = maxDepth(root2) - 1;
+    printf("Height of Binary Tree is %d\n", ht2);
+
     return 0;
 }
