@@ -1,4 +1,4 @@
-// C program to recursively construct binary tree from inorder traversal in[] and postorder traversal post[] 
+// C program to recursively construct binary tree from inorder traversal in[] and postorder traversal post[]
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -20,7 +20,7 @@ int search(int arr[], int strt, int end, int value){
     int i;
     for(i=strt; i<=end; i++){
         if(arr[i] == value)
-            break; 
+            break;
     }
     return i;
 }
@@ -34,7 +34,7 @@ struct Node* construct(int in[], int post[], int inStrt, int inEnd, int* pIndex)
     //Pick current node from post[] using postIndex and decrement postIndex
     struct Node* node = newNode(post[*pIndex]);
     (*pIndex)--;
-    
+
     //If this node has no children, return node
     if(inStrt == inEnd)
         return node;
@@ -71,6 +71,47 @@ int maxDepth(struct Node* node){
         return rDepth+1;
 }
 
+void printInorder(struct Node* node, int *array)
+{
+	static int count = 0;
+    if (node == NULL)
+        return;
+
+    printInorder(node->left, array);
+
+ 	array[count] = node->data;
+ 	count++;
+
+    printInorder(node->right,array);
+    return;
+}
+
+int *generate_inorder(int height)
+{
+	int *array = (int *)malloc((2*height + 1)*sizeof(int));
+
+	struct Node *root = (struct Node *)malloc(sizeof(struct Node));
+	root->data = 1;
+	struct Node *temp = root;
+	for(int i = 0; i < height; i++)
+	{
+		temp->left = (struct Node *)malloc(sizeof(struct Node));
+		temp->right = (struct Node *)malloc(sizeof(struct Node));
+
+		temp->left->data = 2*(i+1);
+		temp->right->data = 2*(i+1) + 1;
+		temp->right->left = NULL;
+		temp->right->right = NULL;
+		temp = temp->left;
+	}
+	temp->left = NULL;
+	temp->right = NULL;
+
+	printInorder(root, array);
+
+	return array;
+}
+
 int main(){
     int in[] = {8,6,9,4,7,2,5,1,3};
 	int post[] = {8,9,6,7,4,5,2,3,1};
@@ -89,12 +130,28 @@ int main(){
     int post2[] = {40, 41, 38, 39, 36, 37, 34, 35, 32, 33, 30, 31, 28, 29, 26, 27, 24,
             25, 22, 23, 20, 21, 18, 19, 16, 17, 14, 15, 12, 13, 10, 11, 8, 9, 6,
             7, 4, 5, 2, 3, 1};
-    
+
     int m = sizeof(in2)/sizeof(in2[0]);
     struct Node* root2 = constructTree(in2, post2, m);
 
     int ht2 = maxDepth(root2) - 1;
     printf("Height of Binary Tree is %d\n", ht2);
+
+    int h = 20;
+    //scanf("Enter required height %d", h);
+    int x = 2*h+ 1;
+    int *p = generate_inorder(h);
+
+    printf("Inorder array for height %d is: ", h);
+    for(int i=0; i<x; i++){
+        printf("%d ", *(p + i));
+    }
+
+    //Using generated inorder array & prev postorder to find height(20) of binary tree
+    struct Node* root3 = constructTree(p, post2, m);
+
+    int ht3 = maxDepth(root3) - 1;
+    printf("\n Height of Binary Tree is %d\n", ht3);
 
     return 0;
 }
