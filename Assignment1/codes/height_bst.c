@@ -71,6 +71,7 @@ int maxDepth(struct Node* node){
         return rDepth+1;
 }
 
+//Helper function for generate_inorder()
 void printInorder(struct Node* node, int *array)
 {
 	static int count = 0;
@@ -86,8 +87,10 @@ void printInorder(struct Node* node, int *array)
     return;
 }
 
+//Generates inorder array for any height 
 int *generate_inorder(int height)
 {
+	//allocate space as for ht h, number of elements in array : 2*ht + 1
 	int *array = (int *)malloc((2*height + 1)*sizeof(int));
 
 	struct Node *root = (struct Node *)malloc(sizeof(struct Node));
@@ -106,9 +109,9 @@ int *generate_inorder(int height)
 	}
 	temp->left = NULL;
 	temp->right = NULL;
-
+	//Puts element of the tree into an array in inorder traversal
 	printInorder(root, array);
-
+	//returns pointer to the array
 	return array;
 }
 
