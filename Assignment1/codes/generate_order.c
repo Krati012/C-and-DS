@@ -14,7 +14,7 @@ void swap(int *xp, int *yp){
     *yp = temp;
 }
 
-//Helper function for generate_inorder()
+//Helper function for inorder array for generate_order()
 void printInorder(struct Node* node, int *array){
 	static int count = 0;
     if (node == NULL)
@@ -29,8 +29,24 @@ void printInorder(struct Node* node, int *array){
     return;
 }
 
-//Generates inorder array for any height
-int *generate_inorder(int height){
+//Helper function for postorder array for generate_order()
+void printPostorder(struct Node* node, int *array){
+    static int count = 0;
+    if (node == NULL)
+        return;
+
+    printPostorder(node->left, array);
+    printPostorder(node->right,array);
+
+ 	array[count] = node->data;
+ 	count++;
+
+    return;
+}
+
+//Generates traversal array for any height
+//Use iop = 1 for inorder, iop = 2 for postorder
+int *generate_order(int height, int iop){
 	//allocate space as for ht h, number of elements in array : 2*ht + 1
 	int *array = (int *)malloc((2*height + 1)*sizeof(int));
 
@@ -50,21 +66,15 @@ int *generate_inorder(int height){
 	}
 	temp->left = NULL;
 	temp->right = NULL;
-	//Puts element of the tree into an array in inorder traversal
-	printInorder(root, array);
+	//Puts element of the tree into an array
+    if(iop == 1){
+        printInorder(root, array);      //iop = 1 for inorder traversal
+    }
+	else{
+        printPostorder(root, array);    //iop = 2 for postorder traversal
+	}
 	//returns pointer to the array
 	return array;
-}
-
-//Generates postorder array given any height and inorder array for the same height
-int *generate_postorder(int height, int *inorder){
-    int *in = inorder;
-    int *array = in;
-    //Swapping consecutive elements in inorder array gives postorder
-    for(int i=1; i < (2*height + 1); i+=2){
-       swap((array+i), (array+i+1));
-    }
-    return array;
 }
 
 int main(){
@@ -73,13 +83,13 @@ int main(){
     scanf("%d", &h);
     int x = 2*h+ 1;
 
-    int *inorder = generate_inorder(h);
+    int *inorder = generate_order(h, 1);
     printf("Inorder array for height %d is: ", h);
     for(int i=0; i<x; i++){
         printf("%d ", *(inorder + i));
     }
 
-    int *postorder = generate_postorder(h, inorder);
+    int *postorder = generate_order(h, 2);
     printf("\nPostorder array for height %d is: ", h);
     for(int i=0; i<x; i++){
         printf("%d ", *(postorder + i));
