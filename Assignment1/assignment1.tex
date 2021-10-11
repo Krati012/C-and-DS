@@ -187,4 +187,20 @@ The following C code uses the above algorithm to construct the tree and prints t
 The constructed tree from above algorithm is shown in Fig. \ref{fig:bst}
 \newline
 Thus, we can see that the height of the tree is 4.
+
+\section{Generating Order Array}
+The following algorithm allows us to generate inorder and postorder traversal array for any given height h.
+\begin{itemize}
+    \item Initialize array of size $2*h + 1$ for inorder and postorder arrays.
+    \item Initialize root of binary tree as 1 and recursively create child nodes of root with values as $2*(i+1)$ and $2*(i+1)+1$, with $i=0,1,..,h-1$.
+    \item Insert the values of the nodes of the tree in inorder or postorder traversal as required in array and return the array.
+\end{itemize}
+
+The following code generates inorder and postorder traversal arrays for random binary tree for any given height.
+\begin{lstlisting}
+    codes/generate_order.c
+\end{lstlisting}
+
+To verify the algorithm, generate arrays for any height h, for eg, $h = 20$, and apply the function to construct and find height of binary tree in height\_bst.c, which gives height of the tree as 20.
+Thus the algorithm is verified.
 \end{document}
