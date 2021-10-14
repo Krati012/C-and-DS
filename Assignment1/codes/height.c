@@ -1,4 +1,4 @@
-// C program to recursively construct binary tree from inorder traversal in[] and postorder traversal post[]
+// C file for run.c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
