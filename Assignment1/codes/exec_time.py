@@ -10,7 +10,7 @@ t1 = []
 t2 = []
 t3 = []
   
-f = open('sample_data/runtime.txt','r')
+f = open('runtime.txt','r')
 
 for row in f:
     row = row.split(' ')
