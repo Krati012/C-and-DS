@@ -203,4 +203,50 @@ The following code generates inorder and postorder traversal arrays for random b
 
 To verify the algorithm, generate arrays for any height h, for eg, $h = 20$, and apply the function to construct and find height of binary tree in height\_bst.c, which gives height of the tree as 20.
 Thus the algorithm is verified.
+
+\section{Complexity}
+The following code runs our program height\_bst.c for different values of n (which is the height of the tree) and saves the execution time in a text file. 
+\begin{lstlisting}
+    codes/run.c
+\end{lstlisting}
+\section{Solution}
+Let us assume the time complexity to process the given input of size $n$ to be $T(n)$ and time taken to process input $n-1$ will be $T(n-1)$. Our program recursively calls the construct function for right and left subtrees. 
+\begin{equation}
+\label{eq:eqn4}
+ T(n) = T(n-1) + n + C
+\end{equation}
+ We get eq \eqref{eq:eqn4} as in the worst case, search in inorder array will take $O(n)$ time, and $C$ is some constant time taken in the process.
+\begin{equation}
+\label{eq:eqn5}
+ T(n-1) = T(n-2) + n + C
+\end{equation}
+Substituting \eqref{eq:eqn5} in \eqref{eq:eqn4},
+\begin{equation}
+ T(n) = T(n-2) + 2n + 2C
+\end{equation}
+On repeated substitution till $n->0$,
+\begin{equation}
+ T(n) = T(0) + n*n + nC
+\end{equation}
+\begin{equation}
+ \implies T(n) = n^2 + nC + T(0)
+\end{equation}
+\begin{equation}
+ \implies T(n) \leq n^2
+\end{equation}
+\begin{equation}
+ \implies T(n) \in O(n^2)
+\end{equation}
+Thus, our program has $O(n^2)$ time complexity.
+The given python file plots the time complexity using the execution time for different size of inputs.
+\begin{lstlisting}
+    codes/exec_time.py
+\end{lstlisting}
+\begin{figure}[!ht]
+\centering
+\includegraphics[width=\columnwidth]{./figs/plot}
+\caption{$T(n)\: vs \: n$}
+\label{fig:time}
+\end{figure}
+We can clearly observe that the original execution time and our mathematical time complexity align with each other.
 \end{document}
